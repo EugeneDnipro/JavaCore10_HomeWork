@@ -3,19 +3,12 @@ package Module8;
 public class GraphicEditor {
     public static void main(String[] args) {
 
-        Quad quad = new Quad();
-        Circle circle = new Circle();
-        Rectangle rectangle = new Rectangle();
-        Line line = new Line();
-        Trapezoid trapezoid = new Trapezoid();
-        Triangle triangle = new Triangle();
-
-        ShapeNamePrinter.shapeNamePrint(quad);
-        ShapeNamePrinter.shapeNamePrint(circle);
-        ShapeNamePrinter.shapeNamePrint(rectangle);
-        ShapeNamePrinter.shapeNamePrint(line);
-        ShapeNamePrinter.shapeNamePrint(trapezoid);
-        ShapeNamePrinter.shapeNamePrint(triangle);
+        Shape quad = new Quad("Quad");
+        Shape circle = new Circle("Circle");
+        Shape rectangle = new Rectangle("Rectangle");
+        Shape line = new Line("Line");
+        Shape trapezoid = new Trapezoid("Trapezoid");
+        Shape triangle = new Triangle("Triangle");
 
         ShapeDrawer.shapeDraw(quad);
         ShapeDrawer.shapeDraw(circle);

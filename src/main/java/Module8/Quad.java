@@ -1,7 +1,12 @@
 package Module8;
 
 class Quad extends Shape {
-    public String getName() {
-        return "Quad";
+    public Quad(String name) {
+        className = name;
     }
+
+    public void draw(){
+        System.out.println("ShapeName = " + className);
+    }
+
 }

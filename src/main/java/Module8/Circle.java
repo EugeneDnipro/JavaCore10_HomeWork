@@ -1,7 +1,12 @@
 package Module8;
 
 class Circle extends Shape {
-    public String getName() {
-        return "Circle";
+    public Circle(String name) {
+        className = name;
     }
+
+    public void draw(){
+        System.out.println("ShapeName = " + className);
+    }
+
 }
