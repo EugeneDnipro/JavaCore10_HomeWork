@@ -6,10 +6,9 @@ public class MyArrayList<E> {
 
     private int size;
     private Object[] elementsStorage;
-    private static final Object[] empty = {};
 
     public MyArrayList() {
-        this.elementsStorage = empty;
+        this.elementsStorage = new Object[0];
         size = 0;
     }
 
@@ -24,34 +23,38 @@ public class MyArrayList<E> {
     }
 
     public E get(int index){
+        validateIndex(index);
         return (E) elementsStorage[index];
     }
 
     public void remove(int index){
-        if (index < 0 || index >= elementsStorage.length){
-            System.out.println("Index is incorrect!");
-        } else {
-            for (int i = 0; i < elementsStorage.length; i++) {
-                if (i == index) {
-                    for (int j = i; j < elementsStorage.length - 1; j++) {
-                        elementsStorage[j] = elementsStorage[j + 1];
-                    }
-                    break;
+        validateIndex(index);
+        for (int i = 0; i < elementsStorage.length; i++) {
+            if (i == index) {
+                for (int j = i; j < elementsStorage.length - 1; j++) {
+                    elementsStorage[j] = elementsStorage[j + 1];
                 }
+                break;
             }
-            size -= 1;
-            elementsStorage = Arrays.copyOf(elementsStorage, size);
         }
+        size --;
+        elementsStorage = Arrays.copyOf(elementsStorage, size);
     }
 
     public void clear(){
-        elementsStorage = Arrays.copyOf(elementsStorage, 0);
+        elementsStorage = new Object[0];
         size = 0;
     }
 
     public void printAllMyArrayList () {
         for(Object item: elementsStorage) {
             System.out.println(item);
+        }
+    }
+
+    private void validateIndex (int index) {
+        if (index < 0 || index >= elementsStorage.length){
+            throw new IllegalArgumentException("Illegal index: "+ index);
         }
     }
 }

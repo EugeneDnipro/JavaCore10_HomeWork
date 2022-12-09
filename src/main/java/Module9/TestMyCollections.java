@@ -11,8 +11,8 @@ public class TestMyCollections {
 
         digits.printAllMyArrayList();
         System.out.println("digits.size() = " + digits.size());
-        System.out.println("digits.get(3) = " + digits.get(3));
-        digits.remove(4);
+        System.out.println("digits.get(2) = " + digits.get(2));
+        digits.remove(0);
         digits.printAllMyArrayList();
         System.out.println("digits.size() = " + digits.size());
         digits.clear();
