@@ -19,21 +19,47 @@ public class TestMyCollections {
 //        digits.printAllMyArrayList();
 //        System.out.println("digits.size() = " + digits.size());
 
-        MyLinkedList<String> digitsMLL = new MyLinkedList<String>();
-        digitsMLL.add("One");
-        digitsMLL.add("Two");
-        digitsMLL.add("Three");
-        digitsMLL.add("Four");
-        digitsMLL.add("Five");
+//        MyLinkedList<String> digitsMLL = new MyLinkedList<String>();
+//        digitsMLL.add("One");
+//        digitsMLL.add("Two");
+//        digitsMLL.add("Three");
+//        digitsMLL.add("Four");
+//        digitsMLL.add("Five");
+//
+//        digitsMLL.printAllMyLinkedList();
+//        System.out.println("digitsMLL.size() = " + digitsMLL.size());
+//        System.out.println("digitsMLL.get(0) = " + digitsMLL.get(0));
+//        digitsMLL.remove(0);
+//        digitsMLL.printAllMyLinkedList();
+//        System.out.println("digitsMLL.size() = " + digitsMLL.size());
+//        digitsMLL.clear();
+//        digitsMLL.printAllMyLinkedList();
+//        System.out.println("digitsMLL.size() = " + digitsMLL.size());
 
-        digitsMLL.printAllMyLinkedList();
-        System.out.println("digitsMLL.size() = " + digitsMLL.size());
-        System.out.println("digitsMLL.get(0) = " + digitsMLL.get(0));
-        digitsMLL.remove(0);
-        digitsMLL.printAllMyLinkedList();
-        System.out.println("digitsMLL.size() = " + digitsMLL.size());
-        digitsMLL.clear();
-        digitsMLL.printAllMyLinkedList();
-        System.out.println("digitsMLL.size() = " + digitsMLL.size());
+        MyQueue<String> digitsMQ = new MyQueue<String>();
+        digitsMQ.add("One");
+        digitsMQ.add("Two");
+        digitsMQ.add("Three");
+        digitsMQ.add("Four");
+        digitsMQ.add("Five");
+
+        System.out.println("digitsMQ.size() = " + digitsMQ.size());
+        digitsMQ.printAllMyQueue();
+        System.out.println("digitsMQ.peek() = " + digitsMQ.peek());
+        System.out.println("digitsMQ.poll() = " + digitsMQ.poll());
+        System.out.println("digitsMQ.size() = " + digitsMQ.size());
+        digitsMQ.printAllMyQueue();
+        System.out.println("digitsMQ.poll() = " + digitsMQ.poll());
+        System.out.println("digitsMQ.size() = " + digitsMQ.size());
+        digitsMQ.printAllMyQueue();
+        digitsMQ.add("Six");
+        System.out.println("digitsMQ.size() = " + digitsMQ.size());
+        digitsMQ.printAllMyQueue();
+        digitsMQ.clear();
+        System.out.println("digitsMQ.size() = " + digitsMQ.size());
+        digitsMQ.printAllMyQueue();
+        digitsMQ.add("Seven");
+        System.out.println("digitsMQ.size() = " + digitsMQ.size());
+        digitsMQ.printAllMyQueue();
     }
 }

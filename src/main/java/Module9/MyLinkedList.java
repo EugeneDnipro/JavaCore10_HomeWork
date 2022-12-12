@@ -74,14 +74,14 @@ public class MyLinkedList<E> {
     }
 
     public void clear(){
-        Node<E> x = first;
-        while (x != null){
-            Node<E> next = x.next;
-            x.item = null;
-            x.next = null;
-            x.prev = null;
-            x = next;
-        }
+//        Node<E> x = first;
+//        while (x != null){
+//            Node<E> next = x.next;
+//            x.item = null;
+//            x.next = null;
+//            x.prev = null;
+//            x = next;
+//        }
         first = last = null;
         size = 0;
     }
