@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class MyQueue<E> {
 
     private int size;
-    private int defaultCapacity = 8;
+    private static final int defaultCapacity = 8;
     private Object[] elementsStorage;
 
     public MyQueue() {
@@ -13,8 +13,8 @@ public class MyQueue<E> {
         size = 0;
     }
 
-    public void add(Object value){
-        if (size == elementsStorage.length){
+    public void add(Object value) {
+        if (size == elementsStorage.length) {
             elementsStorage = Arrays.copyOf(elementsStorage, size * 2);
         }
         elementsStorage[size] = value;
@@ -25,7 +25,7 @@ public class MyQueue<E> {
         return size;
     }
 
-    public E peek(){
+    public E peek() {
         if (size == 0)
             return null;
         return (E) elementsStorage[0];
@@ -36,23 +36,23 @@ public class MyQueue<E> {
         int length = elementsStorage.length;
         if (size == 0)
             return null;
-        if ((size - 1 <= length/2) && (size > defaultCapacity)){
-            elementsStorage = Arrays.copyOfRange(elementsStorage, 1, length/2 + 1);
-        } else{
+        if ((size - 1 <= length / 2) && (size > defaultCapacity)) {
+            elementsStorage = Arrays.copyOfRange(elementsStorage, 1, length / 2 + 1);
+        } else {
             elementsStorage = Arrays.copyOfRange(elementsStorage, 1, length + 1);
         }
-        size --;
+        size--;
         return first;
     }
 
-    public void clear(){
+    public void clear() {
         elementsStorage = new Object[defaultCapacity];
         size = 0;
     }
 
-    public void printAllMyQueue () {
-        for(Object item: elementsStorage) {
-            if (item != null){
+    public void printAllMyQueue() {
+        for (Object item : elementsStorage) {
+            if (item != null) {
                 System.out.println(item);
             }
         }

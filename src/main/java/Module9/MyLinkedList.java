@@ -22,7 +22,7 @@ public class MyLinkedList<E> {
         size = 0;
     }
 
-    public void add(E value){
+    public void add(E value) {
         Node<E> l = last;
         Node<E> newNode = new Node<E>(l, value, null);
         last = newNode;
@@ -37,7 +37,7 @@ public class MyLinkedList<E> {
         return size;
     }
 
-    public E get(int index){
+    public E get(int index) {
         validateIndex(index);
         Node<E> x = first;
         for (int i = 0; i < index; i++) {
@@ -46,7 +46,7 @@ public class MyLinkedList<E> {
         return x.item;
     }
 
-    public void remove(int index){
+    public void remove(int index) {
         validateIndex(index);
         Node<E> x = first;
         for (int i = 0; i < index; i++) {
@@ -73,7 +73,7 @@ public class MyLinkedList<E> {
         size--;
     }
 
-    public void clear(){
+    public void clear() {
 //        Node<E> x = first;
 //        while (x != null){
 //            Node<E> next = x.next;
@@ -88,15 +88,15 @@ public class MyLinkedList<E> {
 
     public void printAllMyLinkedList() {
         Node<E> x = first;
-        for (int i = 0; i < size; i++){
+        for (int i = 0; i < size; i++) {
             System.out.println(x.item);
             x = x.next;
         }
     }
 
-    private void validateIndex (int index) {
-        if (index < 0 || index >= size){
-            throw new IllegalArgumentException("Illegal index: "+ index);
+    private void validateIndex(int index) {
+        if (index < 0 || index >= size) {
+            throw new IllegalArgumentException("Illegal index: " + index);
         }
     }
 }

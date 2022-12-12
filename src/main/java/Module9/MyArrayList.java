@@ -12,7 +12,7 @@ public class MyArrayList<E> {
         size = 0;
     }
 
-    public void add(Object value){
+    public void add(Object value) {
         elementsStorage = Arrays.copyOf(elementsStorage, size + 1);
         elementsStorage[size] = value;
         size++;
@@ -22,12 +22,12 @@ public class MyArrayList<E> {
         return size;
     }
 
-    public E get(int index){
+    public E get(int index) {
         validateIndex(index);
         return (E) elementsStorage[index];
     }
 
-    public void remove(int index){
+    public void remove(int index) {
         validateIndex(index);
         for (int i = 0; i < elementsStorage.length; i++) {
             if (i == index) {
@@ -37,24 +37,24 @@ public class MyArrayList<E> {
                 break;
             }
         }
-        size --;
+        size--;
         elementsStorage = Arrays.copyOf(elementsStorage, size);
     }
 
-    public void clear(){
+    public void clear() {
         elementsStorage = new Object[0];
         size = 0;
     }
 
-    public void printAllMyArrayList () {
-        for(Object item: elementsStorage) {
+    public void printAllMyArrayList() {
+        for (Object item : elementsStorage) {
             System.out.println(item);
         }
     }
 
-    private void validateIndex (int index) {
-        if (index < 0 || index >= elementsStorage.length){
-            throw new IllegalArgumentException("Illegal index: "+ index);
+    private void validateIndex(int index) {
+        if (index < 0 || index >= elementsStorage.length) {
+            throw new IllegalArgumentException("Illegal index: " + index);
         }
     }
 }
