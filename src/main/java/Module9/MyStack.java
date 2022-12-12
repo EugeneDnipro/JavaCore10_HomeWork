@@ -5,11 +5,11 @@ import java.util.Arrays;
 public class MyStack<E> {
 
     private int size;
-    private static final int defaultCapacity = 8;
+    private static final int DEFAULT_CAPACITY = 8;
     private Object[] elementsStorage;
 
     public MyStack() {
-        this.elementsStorage = new Object[defaultCapacity];
+        this.elementsStorage = new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 
@@ -44,7 +44,7 @@ public class MyStack<E> {
         }
         elementsStorage[size - 1] = null;
         size--;
-        if ((size <= length / 2) && (size + 1 > defaultCapacity)) {
+        if ((size <= length / 2) && (size + 1 > DEFAULT_CAPACITY)) {
             elementsStorage = Arrays.copyOfRange(elementsStorage, 0, length / 2);
         }
     }
@@ -54,7 +54,7 @@ public class MyStack<E> {
             return null;
         E last = (E) elementsStorage[size - 1];
         int length = elementsStorage.length;
-        if ((size - 1 <= length / 2) && (size > defaultCapacity)) {
+        if ((size - 1 <= length / 2) && (size > DEFAULT_CAPACITY)) {
             elementsStorage = Arrays.copyOfRange(elementsStorage, 0, length / 2);
         } else {
             elementsStorage[size - 1] = null;
@@ -64,7 +64,7 @@ public class MyStack<E> {
     }
 
     public void clear() {
-        elementsStorage = new Object[defaultCapacity];
+        elementsStorage = new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 

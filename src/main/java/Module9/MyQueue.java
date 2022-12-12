@@ -5,11 +5,11 @@ import java.util.Arrays;
 public class MyQueue<E> {
 
     private int size;
-    private static final int defaultCapacity = 8;
+    private static final int DEFAULT_CAPACITY = 8;
     private Object[] elementsStorage;
 
     public MyQueue() {
-        this.elementsStorage = new Object[defaultCapacity];
+        this.elementsStorage = new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 
@@ -36,7 +36,7 @@ public class MyQueue<E> {
         int length = elementsStorage.length;
         if (size == 0)
             return null;
-        if ((size - 1 <= length / 2) && (size > defaultCapacity)) {
+        if ((size - 1 <= length / 2) && (size > DEFAULT_CAPACITY)) {
             elementsStorage = Arrays.copyOfRange(elementsStorage, 1, length / 2 + 1);
         } else {
             elementsStorage = Arrays.copyOfRange(elementsStorage, 1, length + 1);
@@ -46,7 +46,7 @@ public class MyQueue<E> {
     }
 
     public void clear() {
-        elementsStorage = new Object[defaultCapacity];
+        elementsStorage = new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 

@@ -65,31 +65,51 @@ public class TestMyCollections {
 //        System.out.println("digitsMQ.size() = " + digitsMQ.size());
 //        digitsMQ.printAllMyQueue();
 
-        MyStack<String> digitsMS = new MyStack<String>();
+//        MyStack<String> digitsMS = new MyStack<String>();
+//
+//        digitsMS.push("One");
+//        digitsMS.push("Two");
+//        digitsMS.push("Three");
+//        digitsMS.push("Four");
+//        digitsMS.push("Five");
+//
+//        System.out.println("digitsMS.size() = " + digitsMS.size());
+//        digitsMS.printAllMyStack();
+//        System.out.println("digitsMS.peek() = " + digitsMS.peek());
+//        digitsMS.remove(0);
+//        System.out.println("digitsMS.size() = " + digitsMS.size());
+//        digitsMS.printAllMyStack();
+//        System.out.println("digitsMS.pop() = " + digitsMS.pop());
+//        System.out.println("digitsMS.size() = " + digitsMS.size());
+//        digitsMS.printAllMyStack();
+//        System.out.println("digitsMS.pop() = " + digitsMS.pop());
+//        System.out.println("digitsMS.size() = " + digitsMS.size());
+//        digitsMS.printAllMyStack();
+//        digitsMS.clear();
+//        System.out.println("digitsMS.size() = " + digitsMS.size());
+//        digitsMS.printAllMyStack();
+//        digitsMS.push("Six");
+//        System.out.println("digitsMS.size() = " + digitsMS.size());
+//        digitsMS.printAllMyStack();
 
-        digitsMS.push("One");
-        digitsMS.push("Two");
-        digitsMS.push("Three");
-        digitsMS.push("Four");
-        digitsMS.push("Five");
+        MyHashMap<String, Integer> cars = new MyHashMap<String, Integer>();
 
-        System.out.println("digitsMS.size() = " + digitsMS.size());
-        digitsMS.printAllMyStack();
-        System.out.println("digitsMS.peek() = " + digitsMS.peek());
-        digitsMS.remove(0);
-        System.out.println("digitsMS.size() = " + digitsMS.size());
-        digitsMS.printAllMyStack();
-        System.out.println("digitsMS.pop() = " + digitsMS.pop());
-        System.out.println("digitsMS.size() = " + digitsMS.size());
-        digitsMS.printAllMyStack();
-        System.out.println("digitsMS.pop() = " + digitsMS.pop());
-        System.out.println("digitsMS.size() = " + digitsMS.size());
-        digitsMS.printAllMyStack();
-        digitsMS.clear();
-        System.out.println("digitsMS.size() = " + digitsMS.size());
-        digitsMS.printAllMyStack();
-        digitsMS.push("Six");
-        System.out.println("digitsMS.size() = " + digitsMS.size());
-        digitsMS.printAllMyStack();
+        cars.put("Ford Mustang RTR", 650);
+        cars.put("Dodge Challenger Demon", 800);
+        cars.put("Chevrolet Camaro Exorcist", 1000);
+        cars.put("Chevrolet Camaro ZL1", 550);
+
+        System.out.println("cars.size() = " + cars.size());
+        cars.printAllMyHashMap();
+        System.out.println("cars.get(\"Dodge Challenger Demon\") = " + cars.get("Dodge Challenger Demon"));
+        cars.remove("Ford Mustang RTR");
+        System.out.println("cars.size() = " + cars.size());
+        cars.printAllMyHashMap();
+        cars.put("Chevrolet Corvette Z06", 670);
+        System.out.println("cars.size() = " + cars.size());
+        cars.printAllMyHashMap();
+        cars.clear();
+        System.out.println("cars.size() = " + cars.size());
+        cars.printAllMyHashMap();
     }
 }
