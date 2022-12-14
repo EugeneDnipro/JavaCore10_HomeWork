@@ -95,20 +95,21 @@ public class TestMyCollections {
         MyHashMap<String, Integer> cars = new MyHashMap<String, Integer>();
 
         cars.put("Ford Mustang RTR", 650);
+        cars.put("Ford Mstang RTR", 625);
         cars.put("Dodge Challenger Demon", 800);
         cars.put("Chevrolet Camaro Exorcist", 1000);
         cars.put("Chevrolet Camaro ZL1", 550);
 
         System.out.println("cars.size() = " + cars.size());
         cars.printAllMyHashMap();
-        System.out.println("cars.get(\"Dodge Challenger Demon\") = " + cars.get("Dodge Challenger Demon"));
-        cars.remove("Ford Mustang RTR");
-        System.out.println("cars.size() = " + cars.size());
-        cars.printAllMyHashMap();
-        cars.put("Chevrolet Corvette Z06", 670);
+        System.out.println("cars.get(\"Ford Mstang RTR\") = " + cars.get("Ford Mstang RTR"));
+        cars.remove("Chevrolet Camaro Exorcist");
         System.out.println("cars.size() = " + cars.size());
         cars.printAllMyHashMap();
         cars.clear();
+        System.out.println("cars.size() = " + cars.size());
+        cars.printAllMyHashMap();
+        cars.put("Chevrolet Corvette Z06", 670);
         System.out.println("cars.size() = " + cars.size());
         cars.printAllMyHashMap();
     }
