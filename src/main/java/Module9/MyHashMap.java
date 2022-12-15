@@ -80,7 +80,7 @@ public class MyHashMap<K, V> {
         }
         if ((key != null && key.equals(table[index].key)) || ((key == null) && table[index] != null)) {
             result = table[index].value;
-        } else if ((key != null) && (table[index].next != null)){
+        } else if ((key != null) && (table[index].next != null)) {
             x = table[index].next;
             do {
                 if (key.equals(x.key)) {
