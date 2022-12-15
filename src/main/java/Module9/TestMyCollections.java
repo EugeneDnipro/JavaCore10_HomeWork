@@ -104,7 +104,6 @@ public class TestMyCollections {
         System.out.println("cars.size() = " + cars.size());
         cars.printAllMyHashMap();
         System.out.println("cars.get(\"Ford Mstang RTR\") = " + cars.get("Ford Mstang RTR"));
-        System.out.println("cars.get(\"null\") = " + cars.get(null));
         cars.remove(null);
         System.out.println("cars.size() = " + cars.size());
         cars.printAllMyHashMap();

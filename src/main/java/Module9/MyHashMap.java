@@ -78,9 +78,9 @@ public class MyHashMap<K, V> {
         if (table[index] == null) {
             return result;
         }
-        if (key != null && key.equals(table[index].key)) {
+        if ((key != null && key.equals(table[index].key)) || ((key == null) && table[index] != null)) {
             result = table[index].value;
-        } else if (key != null) {
+        } else if ((key != null) && (table[index].next != null)){
             x = table[index].next;
             do {
                 if (key.equals(x.key)) {
@@ -97,7 +97,7 @@ public class MyHashMap<K, V> {
         Node<K, V> x = null;
         Node<K, V> prev = null;
         Node<K, V> result = null;
-        if ((table[index] == null) || ((key != null) && !(key.equals(table[index].key)))) {
+        if ((table[index] == null) || ((key != null) && !(key.equals(table[index].key)) && (table[index].next == null))) {
             throw new IllegalArgumentException("There is no such element in this collection!");
         } else if (((key != null) && (key.equals(table[index].key)) && (table[index].next == null)) || ((key == null) && table[index] != null)) {
             table[index] = null;
@@ -114,9 +114,9 @@ public class MyHashMap<K, V> {
                 prev = x;
                 x = x.next;
             } while (x != null);
-            if (table[index].key.equals(result.key)) {
+            if ((result != null) && (table[index].key.equals(result.key))) {
                 table[index] = table[index].next;
-            } else {
+            } else if ((prev != null) && (result != null)) {
                 prev.next = result.next;
                 result.next = null;
             }
