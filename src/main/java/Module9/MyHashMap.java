@@ -44,7 +44,7 @@ public class MyHashMap<K, V> {
         }
     }
 
-    private static final int hash(Object key) {
+    private static int hash(Object key) {
         int h;
         return (key == null) ? 0 : (h = key.hashCode()) ^ (h >>> 16);
     }
@@ -78,12 +78,12 @@ public class MyHashMap<K, V> {
         if (table[index] == null) {
             return result;
         }
-        if (table[index].key.equals(key)) {
+        if (key != null && key.equals(table[index].key)) {
             result = table[index].value;
-        } else {
+        } else if (key != null) {
             x = table[index].next;
             do {
-                if (x.key.equals(key)) {
+                if (key.equals(x.key)) {
                     return x.value;
                 }
                 x = x.next;
@@ -97,15 +97,14 @@ public class MyHashMap<K, V> {
         Node<K, V> x = null;
         Node<K, V> prev = null;
         Node<K, V> result = null;
-        if (table[index] == null) {
-            System.out.println("There is no such element in this collection!");
-            return;
-        } else if ((key.equals(table[index].key)) && (table[index].next == null)) {
+        if ((table[index] == null) || ((key != null) && !(key.equals(table[index].key)))) {
+            throw new IllegalArgumentException("There is no such element in this collection!");
+        } else if (((key != null) && (key.equals(table[index].key)) && (table[index].next == null)) || ((key == null) && table[index] != null)) {
             table[index] = null;
             size--;
             return;
         }
-        if (table[index].next != null) {
+        if ((key != null) && (table[index].next != null)) {
             x = table[index];
             do {
                 if (key.equals(x.key)) {
