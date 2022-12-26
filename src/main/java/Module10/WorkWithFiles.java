@@ -31,28 +31,24 @@ public class WorkWithFiles {
     }
 
     public static void phoneFileValidate() {
-        char[] buf;
         String path = ".\\src\\main\\resources\\file.txt";
-        if (dataFromFileReader(path) == null) {
+        char[] buf = dataFromFileReader(path);
+        if (buf == null) {
             return;
-        } else {
-            buf = dataFromFileReader(path);
         }
 
         StringBuilder result = new StringBuilder();
         ArrayList<String> numbers = new ArrayList<String>();
         int count = 0;
-        if (buf != null) {
-            for (char item : buf) {
-                if ((item != '\r') && (item != '\n')) {
-                    result.append(item);
-                    count++;
-                } else if (count > 0) {
-                    String number = result.toString();
-                    result.delete(0, result.length());
-                    numbers.add(number);
-                    count = 0;
-                }
+        for (char item : buf) {
+            if ((item != '\r') && (item != '\n')) {
+                result.append(item);
+                count++;
+            } else if (count > 0) {
+                String number = result.toString();
+                result.delete(0, result.length());
+                numbers.add(number);
+                count = 0;
             }
         }
 
@@ -69,28 +65,24 @@ public class WorkWithFiles {
     }
 
     public static void wordCounter() {
-        char[] buf;
         String path = ".\\src\\main\\resources\\words.txt";
-        if (dataFromFileReader(path) == null) {
+        char[] buf = dataFromFileReader(path);
+        if (buf == null) {
             return;
-        } else {
-            buf = dataFromFileReader(path);
         }
 
         StringBuilder result = new StringBuilder();
         ArrayList<String> words = new ArrayList<String>();
         int count = 0;
-        if (buf != null) {
-            for (char item : buf) {
-                if ((item != '\r') && (item != '\n') && (item != ' ')) {
-                    result.append(item);
-                    count++;
-                } else if (count > 0) {
-                    String word = result.toString();
-                    result.delete(0, result.length());
-                    words.add(word);
-                    count = 0;
-                }
+        for (char item : buf) {
+            if ((item != '\r') && (item != '\n') && (item != ' ')) {
+                result.append(item);
+                count++;
+            } else if (count > 0) {
+                String word = result.toString();
+                result.delete(0, result.length());
+                words.add(word);
+                count = 0;
             }
         }
 
