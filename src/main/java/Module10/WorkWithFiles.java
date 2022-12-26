@@ -64,6 +64,27 @@ public class WorkWithFiles {
         }
     }
 
+    public static void printSortedWordsNumber(Map<String, Integer> map) {
+        for (Map.Entry<String, Integer> entry : map.entrySet())
+            System.out.println(entry.getKey() + " " + entry.getValue());
+    }
+
+    public static Map<String, Integer> sorter(Map<String, Integer> wordsNumber) {
+        List<Map.Entry<String, Integer>> wordsNumberList = new ArrayList(wordsNumber.entrySet());
+        wordsNumberList.sort(new Comparator<Map.Entry<String, Integer>>() {
+            @Override
+            public int compare(Map.Entry<String, Integer> a, Map.Entry<String, Integer> b) {
+                return b.getValue() - a.getValue();
+            }
+        });
+
+        Map<String, Integer> sortedWordsNumber = new LinkedHashMap<>();
+        for (Map.Entry<String, Integer> entry : wordsNumberList) {
+            sortedWordsNumber.put(entry.getKey(), entry.getValue());
+        }
+        return sortedWordsNumber;
+    }
+
     public static void wordCounter() {
         String path = ".\\src\\main\\resources\\words.txt";
         char[] buf = dataFromFileReader(path);
@@ -93,20 +114,6 @@ public class WorkWithFiles {
             else wordsNumber.put(elem, 1);
         }
 
-        List<Map.Entry<String, Integer>> wordsNumberList = new ArrayList(wordsNumber.entrySet());
-        wordsNumberList.sort(new Comparator<Map.Entry<String, Integer>>() {
-            @Override
-            public int compare(Map.Entry<String, Integer> a, Map.Entry<String, Integer> b) {
-                return b.getValue() - a.getValue();
-            }
-        });
-
-        Map<String, Integer> sortedWordsNumber = new LinkedHashMap<>();
-        for (Map.Entry<String, Integer> entry : wordsNumberList) {
-            sortedWordsNumber.put(entry.getKey(), entry.getValue());
-        }
-
-        for (Map.Entry<String, Integer> entry : sortedWordsNumber.entrySet())
-            System.out.println(entry.getKey() + " " + entry.getValue());
+        printSortedWordsNumber(sorter(wordsNumber));
     }
 }
