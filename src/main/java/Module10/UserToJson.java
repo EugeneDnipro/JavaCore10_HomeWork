@@ -25,14 +25,7 @@ public class UserToJson {
         }
     }
 
-
-    public void fileToUser() {
-        String path = ".\\src\\main\\resources\\fileUsers.txt";
-        char[] buf = WorkWithFiles.dataFromFileReader(path);
-        if (buf == null) {
-            return;
-        }
-
+    private ArrayList<User> getUsers(char[] buf) {
         ArrayList<String> words = WorkWithFiles.getWords(buf);
         ArrayList<User> users = new ArrayList<User>();
 
@@ -40,8 +33,15 @@ public class UserToJson {
             User user = new User(words.get(i), Integer.parseInt(words.get(i + 1)));
             users.add(user);
         }
+        return users;
+    }
 
-        jsonMakerAndPrinter(users);
+    public void fileToUser() {
+        String path = ".\\src\\main\\resources\\fileUsers.txt";
+        char[] buf = WorkWithFiles.dataFromFileReader(path);
+        if (buf != null) {
+            jsonMakerAndPrinter(getUsers(buf));
+        }
     }
 
     private void jsonMakerAndPrinter(ArrayList<User> users) {
