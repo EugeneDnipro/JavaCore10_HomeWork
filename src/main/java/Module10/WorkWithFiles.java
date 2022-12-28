@@ -30,13 +30,7 @@ public class WorkWithFiles {
         return buf;
     }
 
-    public static void phoneFileValidate() {
-        String path = ".\\src\\main\\resources\\file.txt";
-        char[] buf = dataFromFileReader(path);
-        if (buf == null) {
-            return;
-        }
-
+    private static ArrayList<String> getNumbers(char[] buf) {
         StringBuilder result = new StringBuilder();
         ArrayList<String> numbers = new ArrayList<String>();
         int count = 0;
@@ -51,7 +45,10 @@ public class WorkWithFiles {
                 count = 0;
             }
         }
+        return numbers;
+    }
 
+    private static void printData(ArrayList<String> numbers) {
         String patterns
                 = "^\\(\\d{3}\\) \\d{3}\\-\\d{4}$"
                 + "|^\\d{3}[-]\\d{3}[-]\\d{4}$";
@@ -61,6 +58,14 @@ public class WorkWithFiles {
             if (matcher.matches()) {
                 System.out.println(number);
             }
+        }
+    }
+
+    public static void phoneFileValidate() {
+        String path = ".\\src\\main\\resources\\file.txt";
+        char[] buf = dataFromFileReader(path);
+        if (buf != null) {
+            printData(getNumbers(buf));
         }
     }
 
@@ -85,13 +90,7 @@ public class WorkWithFiles {
         return sortedWordsNumber;
     }
 
-    public static void wordCounter() {
-        String path = ".\\src\\main\\resources\\words.txt";
-        char[] buf = dataFromFileReader(path);
-        if (buf == null) {
-            return;
-        }
-
+    public static ArrayList<String> getWords(char[] buf) {
         StringBuilder result = new StringBuilder();
         ArrayList<String> words = new ArrayList<String>();
         int count = 0;
@@ -106,6 +105,17 @@ public class WorkWithFiles {
                 count = 0;
             }
         }
+        return words;
+    }
+
+    public static void wordCounter() {
+        String path = ".\\src\\main\\resources\\words.txt";
+        char[] buf = dataFromFileReader(path);
+        if (buf == null) {
+            return;
+        }
+
+        ArrayList<String> words = getWords(buf);
 
         Map<String, Integer> wordsNumber = new HashMap<>();
         for (String elem : words) {
