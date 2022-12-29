@@ -2,15 +2,25 @@ package Module11;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
+import static java.util.stream.Collectors.toList;
+
 public class WorkingWithStreams {
-    List<String> names = Arrays.asList("Jeremy", "Bill", "Richard", "John", "James", "Tom");
-    Stream<String> nameStream = names.stream();
+    public static List<String> names = Arrays.asList("Jeremy", "Bill", "Richard", "John", "James", "Tom");
 
-    List<String> filteredNames = names.stream().collect(Collectors.toList());
+    public static void oddNames() {
+        AtomicInteger i = new AtomicInteger(1);
+        AtomicInteger j = new AtomicInteger(0);
+        Stream<String> nameStream = names.stream()
+                .map(name -> (i.getAndIncrement()) + ". " + name)
+                .filter(e -> ((j.getAndIncrement()) % 2 == 0));
 
-    //    System.out.println(filteredNames);
+        List<String> filteredNames = nameStream.collect(toList());
+
+        System.out.println(filteredNames);
+    }
+
 }
 
