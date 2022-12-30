@@ -1,5 +1,6 @@
 package Module11;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -27,10 +28,9 @@ public class WorkingWithStreams {
     }
 
     public static String sortedNumbers(String[] array) {
-        return Stream.of(array)
-                .map(n -> n.replace("\"", ""))
-                .sorted()
-                .collect(Collectors.joining(", ", "\"", "\""));
+        List<String> names = new ArrayList<>();
+        Stream.of(array).map(n -> n.split(", ")).forEach(i -> names.addAll(Arrays.asList(i)));
+        return names.stream().sorted().collect(Collectors.joining(", ", "\"", "\""));
     }
 
     public static <T> long generator(T n1, long a1, long c1, long m1) {
