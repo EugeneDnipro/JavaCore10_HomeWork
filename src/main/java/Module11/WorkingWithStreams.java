@@ -30,7 +30,7 @@ public class WorkingWithStreams {
         return Stream.of(array)
                 .map(n -> n.replace("\"", ""))
                 .sorted()
-                .collect(Collectors.joining(", "));
+                .collect(Collectors.joining(", ", "\"", "\""));
     }
 
     public static <T> long generator(T n1, long a1, long c1, long m1) {
