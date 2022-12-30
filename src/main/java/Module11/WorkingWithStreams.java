@@ -10,24 +10,20 @@ import java.util.stream.Stream;
 public class WorkingWithStreams {
     public static List<String> names = Arrays.asList("Jeremy", "Bill", "Richard", "John", "James", "Tom");
 
-    public static void oddNames() {
+    public static String oddNames() {
         AtomicInteger i = new AtomicInteger(1);
         AtomicInteger j = new AtomicInteger(0);
-        String oddNamesString = names.stream()
+        return names.stream()
                 .map(name -> (i.getAndIncrement()) + ". " + name)
                 .filter(e -> ((j.getAndIncrement()) % 2 == 0))
                 .collect(Collectors.joining(", "));
-
-        System.out.println(oddNamesString);
     }
 
-    public static void sortedNames() {
-        List<String> sortedNamesStringList = names.stream()
+    public static List<String> sortedNames() {
+        return names.stream()
                 .map(String::toUpperCase)
                 .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
-
-        System.out.println(sortedNamesStringList);
     }
 
     public static String sortedNumbers(String[] array) {
