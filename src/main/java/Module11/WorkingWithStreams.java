@@ -1,6 +1,7 @@
 package Module11;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -17,6 +18,15 @@ public class WorkingWithStreams {
                 .collect(Collectors.joining(", "));
 
         System.out.println(oddNamesString);
+    }
+
+    public static void sortedNames() {
+        List<String> sortedNamesStringList = names.stream()
+                .map(String::toUpperCase)
+                .sorted(Comparator.reverseOrder())
+                .collect(Collectors.toList());
+
+        System.out.println(sortedNamesStringList);
     }
 
 }
