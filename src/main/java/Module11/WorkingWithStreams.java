@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WorkingWithStreams {
     public static List<String> names = Arrays.asList("Jeremy", "Bill", "Richard", "John", "James", "Tom");
@@ -27,6 +28,15 @@ public class WorkingWithStreams {
                 .collect(Collectors.toList());
 
         System.out.println(sortedNamesStringList);
+    }
+
+    public static void sortedNumbers() {
+        String sortedNumbersString = Stream.of("\"1", "2", "0\"", "\"4", "5\"")
+                .map(n -> n.replace("\"", ""))
+                .sorted()
+                .collect(Collectors.joining(", "));
+
+        System.out.println(sortedNumbersString);
     }
 
 }
