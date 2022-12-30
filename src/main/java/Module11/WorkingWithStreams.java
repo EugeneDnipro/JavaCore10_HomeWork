@@ -3,9 +3,7 @@ package Module11;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
+import java.util.stream.Collectors;
 
 public class WorkingWithStreams {
     public static List<String> names = Arrays.asList("Jeremy", "Bill", "Richard", "John", "James", "Tom");
@@ -13,13 +11,12 @@ public class WorkingWithStreams {
     public static void oddNames() {
         AtomicInteger i = new AtomicInteger(1);
         AtomicInteger j = new AtomicInteger(0);
-        Stream<String> nameStream = names.stream()
+        String oddNamesString = names.stream()
                 .map(name -> (i.getAndIncrement()) + ". " + name)
-                .filter(e -> ((j.getAndIncrement()) % 2 == 0));
+                .filter(e -> ((j.getAndIncrement()) % 2 == 0))
+                .collect(Collectors.joining(", "));
 
-        List<String> filteredNames = nameStream.collect(toList());
-
-        System.out.println(filteredNames);
+        System.out.println(oddNamesString);
     }
 
 }
