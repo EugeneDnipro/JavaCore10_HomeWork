@@ -30,13 +30,19 @@ public class WorkingWithStreams {
         System.out.println(sortedNamesStringList);
     }
 
-    public static void sortedNumbers() {
-        String sortedNumbersString = Stream.of("\"1", "2", "0\"", "\"4", "5\"")
+    public static String sortedNumbers(String[] array) {
+        return Stream.of(array)
                 .map(n -> n.replace("\"", ""))
                 .sorted()
                 .collect(Collectors.joining(", "));
+    }
 
-        System.out.println(sortedNumbersString);
+    public static <T> long generator(T n1, long a1, long c1, long m1) {
+        return (a1 * (long) n1 + c1) % m1;
+    }
+
+    public static Stream<Long> randomStream(long a, long c, long m) {
+        return Stream.iterate(7L, n -> generator(n, a, c, m));
     }
 
 }
