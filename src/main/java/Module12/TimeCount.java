@@ -7,7 +7,7 @@ import java.util.concurrent.ScheduledFuture;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class TimeCount {
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(2);
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(0);
     long start = System.currentTimeMillis();
 
     public void beep() {
