@@ -1,9 +1,6 @@
 package Module11;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -39,6 +36,20 @@ public class WorkingWithStreams {
 
     public static Stream<Long> randomStream(long a, long c, long m) {
         return Stream.iterate(7L, n -> generator(n, a, c, m));
+    }
+
+    public static <T> Stream<T> zip(Stream<T> first, Stream<T> second) {
+
+        Iterator<T> iteratorA = first.iterator();
+        Iterator<T> iteratorB = second.iterator();
+        List<T> res = new ArrayList<>();
+
+        while (iteratorA.hasNext() && iteratorB.hasNext()) {
+            res.add(iteratorA.next());
+            res.add(iteratorB.next());
+        }
+
+        return res.stream();
     }
 
 }
