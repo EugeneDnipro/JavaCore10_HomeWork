@@ -1,26 +1,39 @@
 package Module12;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-
-import static java.util.concurrent.TimeUnit.SECONDS;
-
 public class TimeCount {
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(0);
-    long start = System.currentTimeMillis();
+    static long start = System.currentTimeMillis();
+
+    private static class BeeperOne implements Runnable {
+        public void run() {
+            try {
+                while ((System.currentTimeMillis() - start) / 1000 < 30) {
+                    Thread.sleep(1000);
+                    System.out.println((System.currentTimeMillis() - start) / 1000);
+                }
+            } catch (InterruptedException e) {
+                System.out.println("Виконання задачі не завершене!");
+            }
+        }
+    }
+
+    private static class BeeperFive implements Runnable {
+        public void run() {
+            try {
+                while ((System.currentTimeMillis() - start) / 1000 < 30) {
+                    Thread.sleep(5000);
+                    System.out.println("Минуло 5 секунд");
+                }
+            } catch (InterruptedException e) {
+                System.out.println("Виконання задачі не завершене!");
+            }
+        }
+    }
 
     public void beep() {
-        final Runnable beeperFive = () -> System.out.println("Минуло 5 секунд");
 
-        final Runnable beeperOne = () -> System.out.println((System.currentTimeMillis() - start) / 1000);
-
-        final ScheduledFuture<?> beeperHandleOne = scheduler.scheduleAtFixedRate(beeperOne, 1, 1, SECONDS);
-        final ScheduledFuture<?> beeperHandleFive = scheduler.scheduleAtFixedRate(beeperFive, 5, 5, SECONDS);
-
-        scheduler.schedule(() -> {
-            beeperHandleOne.cancel(true);
-            beeperHandleFive.cancel(true);
-        }, 30, SECONDS);
+        Thread oneSecond = new Thread(new BeeperOne());
+        Thread fiveSecond = new Thread(new BeeperFive());
+        oneSecond.start();
+        fiveSecond.start();
     }
 }

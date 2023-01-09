@@ -1,89 +1,170 @@
 package Module12;
 
-import java.util.ArrayList;
-import java.util.concurrent.Callable;
-
 public class ReplacingNumbers {
+    static int count;
 
-    public ArrayList<Integer> numbersLine (int n){
-        ArrayList<Integer> line = new ArrayList<>();
-        for (int i = 1; i <= n; i ++){
-            line.add(i);
+    static class Control {
+        String s;
+
+        boolean valueSet = false;
+
+        synchronized String get() {
+            while (!valueSet) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+
+            valueSet = false;
+            notify();
+            return s;
         }
-        return line;
+
+        synchronized void put(String s) {
+
+            while (valueSet) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+
+            this.s = s;
+            valueSet = true;
+            notify();
+        }
     }
 
-    public static class Fizz{
-        public String replaceWithFizz(int n){
-            if (n % 3 == 0)
-                return "fizz";
-            return String.valueOf(n);
-        }
-    }
+    static class Fizz implements Runnable {
+        Control part;
+        int n;
+        Thread thread;
 
-    public static class ThreadA implements Callable<String> {
-        private final int n;
-
-        public ThreadA(int n) {
+        public Fizz(Control part, int n) {
+            this.part = part;
             this.n = n;
+
+            thread = new Thread(this, "ThreadA");
+            thread.start();
         }
 
-        Fizz fizz = new Fizz();
-
-        @Override
-        public String call() {
-            return fizz.replaceWithFizz(n);
+        public void run() {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if ((n % 3 == 0) && (n % 5 != 0)) {
+                part.put("fizz");
+            }
         }
     }
 
-    public static class Buzz{
-        public String replaceWithBuzz(int n){
-            if (n % 5 == 0)
-                return "buzz";
-            return String.valueOf(n);
-        }
-    }
+    static class Buzz implements Runnable {
+        Control part;
+        int n;
+        Thread thread;
 
-    public static class ThreadB implements Callable<String> {
-        private final int n;
-
-        public ThreadB(int n) {
+        public Buzz(Control part, int n) {
+            this.part = part;
             this.n = n;
+
+            thread = new Thread(this, "ThreadB");
+            thread.start();
         }
 
-        Buzz buzz = new Buzz();
-
-        @Override
-        public String call() {
-            return buzz.replaceWithBuzz(n);
+        public void run() {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if ((n % 5 == 0) && (n % 3 != 0)) {
+                part.put("buzz");
+            }
         }
     }
 
-    public static class FizzBuzz{
-        public String replaceWithFizzBuzz(int n){
-            if ((n % 3 == 0) && (n % 5 == 0))
-                return "fizzbuzz";
-            return String.valueOf(n);
-        }
-    }
+    static class FizzBuzz implements Runnable {
+        Control part;
+        int n;
+        Thread thread;
 
-    public static class ThreadC implements Callable<String> {
-        private final int n;
-
-        public ThreadC(int n) {
+        public FizzBuzz(Control part, int n) {
+            this.part = part;
             this.n = n;
+
+            thread = new Thread(this, "ThreadC");
+            thread.start();
         }
 
-        FizzBuzz fizzbuzz = new FizzBuzz();
-
-        @Override
-        public String call() {
-            return fizzbuzz.replaceWithFizzBuzz(n);
+        public void run() {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if ((n % 3 == 0) && (n % 5 == 0)) {
+                part.put("fizzbuzz");
+            }
         }
     }
 
-//    public void number(){
-//
-//    }
+    static class Number implements Runnable {
+        Control part;
+        int n;
+        Thread thread;
 
+        public Number(Control part, int n) {
+            this.part = part;
+            this.n = n;
+
+            thread = new Thread(this, "ThreadD");
+            thread.start();
+        }
+
+        public void run() {
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            if (n != count) {
+                System.out.print(part.get() + ", ");
+            } else {
+                System.out.print(part.get() + "\n");
+            }
+        }
+    }
+
+    public synchronized void printSymbols(Control part, int n) {
+        count = n;
+        for (int i = 1; i <= n; i++) {
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            new Fizz(part, i);
+            new Buzz(part, i);
+            new FizzBuzz(part, i);
+            new Number(part, i);
+            if (i % 3 != 0) {
+                if (i % 5 != 0) {
+                    part.put(String.valueOf(i));
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        ReplacingNumbers line = new ReplacingNumbers();
+        Control part = new Control();
+        line.printSymbols(part, 15);
+    }
 }
+
+
