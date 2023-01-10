@@ -51,14 +51,16 @@ public class ReplacingNumbers {
             thread.start();
         }
 
-        public void run() {
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if ((n % 3 == 0) && (n % 5 != 0)) {
-                part.put("fizz");
+        public synchronized void run() {
+            for (int i = 1; i <= n; i++) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if ((i % 3 == 0) && (i % 5 != 0)) {
+                    part.put("fizz");
+                }
             }
         }
     }
@@ -76,14 +78,16 @@ public class ReplacingNumbers {
             thread.start();
         }
 
-        public void run() {
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if ((n % 5 == 0) && (n % 3 != 0)) {
-                part.put("buzz");
+        public synchronized void run() {
+            for (int i = 1; i <= n; i++) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if ((i % 5 == 0) && (i % 3 != 0)) {
+                    part.put("buzz");
+                }
             }
         }
     }
@@ -102,13 +106,15 @@ public class ReplacingNumbers {
         }
 
         public void run() {
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if ((n % 3 == 0) && (n % 5 == 0)) {
-                part.put("fizzbuzz");
+            for (int i = 1; i <= n; i++) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if ((i % 3 == 0) && (i % 5 == 0)) {
+                    part.put("fizzbuzz");
+                }
             }
         }
     }
@@ -126,38 +132,32 @@ public class ReplacingNumbers {
             thread.start();
         }
 
-        public void run() {
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            if (n != count) {
-                System.out.print(part.get() + ", ");
-            } else {
-                System.out.print(part.get() + "\n");
+        public synchronized void run() {
+            for (count = 1; count <= n; count++) {
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                if (count % 3 != 0) {
+                    if (count % 5 != 0) {
+                        part.put(String.valueOf(count));
+                    }
+                }
+                if (n != count) {
+                    System.out.print(part.get() + ", ");
+                } else {
+                    System.out.print(part.get() + "\n");
+                }
             }
         }
     }
 
     public synchronized void printSymbols(Control part, int n) {
-        count = n;
-        for (int i = 1; i <= n; i++) {
-            try {
-                Thread.sleep(300);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            new Fizz(part, i);
-            new Buzz(part, i);
-            new FizzBuzz(part, i);
-            new Number(part, i);
-            if (i % 3 != 0) {
-                if (i % 5 != 0) {
-                    part.put(String.valueOf(i));
-                }
-            }
-        }
+        new Number(part, n);
+        new Fizz(part, n);
+        new Buzz(part, n);
+        new FizzBuzz(part, n);
     }
 
     public static void main(String[] args) {
