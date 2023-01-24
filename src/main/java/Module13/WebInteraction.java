@@ -9,57 +9,9 @@ import java.nio.file.Paths;
 
 public class WebInteraction {
     private static final String USERS_URL = "https://jsonplaceholder.typicode.com/users";
+    private static final String USER1_URL = "https://jsonplaceholder.typicode.com/users/1";
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        sendPOST();
-        sendGET();
-        sendPUT();
-        sendDELETE();
-    }
-
-//    private static void sendPOST() throws IOException {
-//        URL url = new URL(USERS_URL);
-//        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-//        connection.setRequestMethod("POST");
-//        connection.setDoOutput(true);
-//        connection.setRequestProperty("Content-Type", "application/json");
-//        OutputStream os = connection.getOutputStream();
-//        os.write(Files.readAllBytes(new File("src/main/resources/userJSON.json").toPath()));
-//        os.flush();
-//        os.close();
-//
-//        int responseCode = connection.getResponseCode();
-//        System.out.println("POST response code: " + responseCode);
-//        if (responseCode == HttpURLConnection.HTTP_CREATED) {
-//            BufferedReader in =
-//                    new BufferedReader(
-//                            new InputStreamReader(connection.getInputStream()));
-//            StringBuffer response = new StringBuffer();
-//            String inputLine;
-//            while ((inputLine = in.readLine()) != null) {
-//                response.append(inputLine);
-//            }
-//            in.close();
-//            System.out.println(response.toString());
-//        } else {
-//            System.out.println("POST request not worked");
-//        }
-//    }
-
-    private static void sendGET() throws IOException, InterruptedException {
-        HttpClient client = HttpClient.newHttpClient();
-
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(USERS_URL))
-                .GET()
-                .build();
-
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.statusCode());
-        System.out.println(response.body());
-    }
-
-    private static void sendPOST() throws IOException, InterruptedException {
+    static void sendPOST() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -69,34 +21,80 @@ public class WebInteraction {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.statusCode());
+        System.out.println("POST response code: " + response.statusCode());
         System.out.println(response.body());
+        System.out.println("=========================================");
     }
 
-    private static void sendPUT() throws IOException, InterruptedException {
+    static void sendPUT() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(USERS_URL))
+                .uri(URI.create(USER1_URL))
                 .header("Content-Type", "application/json")
                 .PUT(HttpRequest.BodyPublishers.ofFile(Paths.get("src/main/resources/existingUserJSON.json")))
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.statusCode());
+        System.out.println("PUT response code: " + response.statusCode());
         System.out.println(response.body());
+        System.out.println("=========================================");
     }
 
-    private static void sendDELETE() throws IOException, InterruptedException {
+    static void sendDELETE() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(USERS_URL))
+                .uri(URI.create(USER1_URL))
                 .DELETE()
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.statusCode());
+        System.out.println("DELETE response code: " + response.statusCode());
+        System.out.println("=========================================");
+    }
+
+    static void sendGET() throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(USERS_URL))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("GET response code: " + response.statusCode());
         System.out.println(response.body());
+        System.out.println("=========================================");
+    }
+
+    static void sendGETbyID(String id) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(USERS_URL + "?id=" + id))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("GETbyID response code: " + response.statusCode());
+        System.out.println("id = " + id);
+        System.out.println(response.body());
+        System.out.println("=========================================");
+    }
+
+    static void sendGETbyUserName(String name) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(USERS_URL + "?username=" + name))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        System.out.println("GETbyUserName response code: " + response.statusCode());
+        System.out.println("name = " + name);
+        System.out.println(response.body());
+        System.out.println("=========================================");
     }
 }
