@@ -96,4 +96,17 @@ public class WebInteraction {
         }.getClass().getEnclosingMethod().getName();
         return response;
     }
+
+    static void getCommentsToLastPostOfUser(String name) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(USERS_URL + "?username=" + name))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        methodName = new Object() {
+        }.getClass().getEnclosingMethod().getName();
+    }
 }
