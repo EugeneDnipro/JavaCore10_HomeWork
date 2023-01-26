@@ -9,9 +9,9 @@ import java.nio.file.Paths;
 
 public class WebInteraction {
     private static final String USERS_URL = "https://jsonplaceholder.typicode.com/users";
-    private static final String USER1_URL = "https://jsonplaceholder.typicode.com/users/1";
+    static String methodName;
 
-    static void sendPOST() throws IOException, InterruptedException {
+    static HttpResponse<String> sendPOST() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -21,40 +21,41 @@ public class WebInteraction {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("POST response code: " + response.statusCode());
-        System.out.println(response.body());
-        System.out.println("=========================================");
+        methodName = new Object() {
+        }.getClass().getEnclosingMethod().getName();
+        return response;
     }
 
-    static void sendPUT() throws IOException, InterruptedException {
+    static HttpResponse<String> sendPUT(int userID) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(USER1_URL))
+                .uri(URI.create(USERS_URL + "/" + userID))
                 .header("Content-Type", "application/json")
                 .PUT(HttpRequest.BodyPublishers.ofFile(Paths.get("src/main/resources/existingUserJSON.json")))
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("PUT response code: " + response.statusCode());
-        System.out.println(response.body());
-        System.out.println("=========================================");
+        methodName = new Object() {
+        }.getClass().getEnclosingMethod().getName();
+        return response;
     }
 
-    static void sendDELETE() throws IOException, InterruptedException {
+    static HttpResponse<String> sendDELETE(int userID) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(USER1_URL))
+                .uri(URI.create(USERS_URL + "/" + userID))
                 .DELETE()
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("DELETE response code: " + response.statusCode());
-        System.out.println("=========================================");
+        methodName = new Object() {
+        }.getClass().getEnclosingMethod().getName();
+        return response;
     }
 
-    static void sendGET() throws IOException, InterruptedException {
+    static HttpResponse<String> sendGET() throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -63,12 +64,12 @@ public class WebInteraction {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("GET response code: " + response.statusCode());
-        System.out.println(response.body());
-        System.out.println("=========================================");
+        methodName = new Object() {
+        }.getClass().getEnclosingMethod().getName();
+        return response;
     }
 
-    static void sendGETbyID(String id) throws IOException, InterruptedException {
+    static HttpResponse<String> sendGETbyID(String id) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -77,13 +78,12 @@ public class WebInteraction {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("GETbyID response code: " + response.statusCode());
-        System.out.println("id = " + id);
-        System.out.println(response.body());
-        System.out.println("=========================================");
+        methodName = new Object() {
+        }.getClass().getEnclosingMethod().getName();
+        return response;
     }
 
-    static void sendGETbyUserName(String name) throws IOException, InterruptedException {
+    static HttpResponse<String> sendGETbyUserName(String name) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -92,9 +92,8 @@ public class WebInteraction {
                 .build();
 
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println("GETbyUserName response code: " + response.statusCode());
-        System.out.println("name = " + name);
-        System.out.println(response.body());
-        System.out.println("=========================================");
+        methodName = new Object() {
+        }.getClass().getEnclosingMethod().getName();
+        return response;
     }
 }
