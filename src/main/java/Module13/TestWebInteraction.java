@@ -10,5 +10,6 @@ public class TestWebInteraction {
         OutputUtils.printResponseCodeAndBody(WebInteraction.sendGET());
         OutputUtils.printResponseCodeAndBody(WebInteraction.sendGETbyID("2"));
         OutputUtils.printResponseCodeAndBody(WebInteraction.sendGETbyUserName("Samantha"));
+        WebInteraction.getCommentsToLastPostOfUser("2");
     }
 }

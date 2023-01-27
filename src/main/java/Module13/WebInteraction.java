@@ -5,10 +5,13 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 public class WebInteraction {
     private static final String USERS_URL = "https://jsonplaceholder.typicode.com/users";
+    private static final String RESPONSE_FILE = ".\\src\\main\\resources\\response.json";
     static String methodName;
 
     static HttpResponse<String> sendPOST() throws IOException, InterruptedException {
@@ -97,16 +100,39 @@ public class WebInteraction {
         return response;
     }
 
-    static void getCommentsToLastPostOfUser(String name) throws IOException, InterruptedException {
+    static void getCommentsToLastPostOfUser(String id) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(USERS_URL + "?username=" + name))
+                .uri(URI.create(USERS_URL + "/" + id + "/posts"))
                 .GET()
                 .build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        methodName = new Object() {
-        }.getClass().getEnclosingMethod().getName();
+        client.send(request, HttpResponse.BodyHandlers.ofFile(Path.of(RESPONSE_FILE)));
+
+        request = HttpRequest.newBuilder()
+                .uri(URI.create("https://jsonplaceholder.typicode.com/posts/" + maxPostFinder() + "/comments"))
+                .GET()
+                .build();
+
+        client.send(request, HttpResponse.BodyHandlers.ofFile(Path.of(".\\src\\main\\resources\\user-" + id + "-post-" + maxPostFinder() + "-comments.json")));
+    }
+
+    static int maxPostFinder() {
+        int count = 0;
+        try (InputStream fis = new FileInputStream(RESPONSE_FILE);
+             Scanner scanner = new Scanner(fis)) {
+            while (scanner.hasNext()) {
+                String line = scanner.nextLine();
+                if (line.contains("\"id\"")) {
+                    String temp = line.strip().replace(",", "");
+                    String[] splitedTemp = temp.split(" ");
+                    count = Integer.parseInt(splitedTemp[1]);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }
