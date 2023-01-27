@@ -100,7 +100,7 @@ public class WebInteraction {
         return response;
     }
 
-    static void getCommentsToLastPostOfUser(String id) throws IOException, InterruptedException {
+    static void commentsToLastPostOfUser(String id) throws IOException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -110,12 +110,13 @@ public class WebInteraction {
 
         client.send(request, HttpResponse.BodyHandlers.ofFile(Path.of(RESPONSE_FILE)));
 
+        int postNumber = maxPostFinder();
         request = HttpRequest.newBuilder()
-                .uri(URI.create("https://jsonplaceholder.typicode.com/posts/" + maxPostFinder() + "/comments"))
+                .uri(URI.create("https://jsonplaceholder.typicode.com/posts/" + postNumber + "/comments"))
                 .GET()
                 .build();
 
-        client.send(request, HttpResponse.BodyHandlers.ofFile(Path.of(".\\src\\main\\resources\\user-" + id + "-post-" + maxPostFinder() + "-comments.json")));
+        client.send(request, HttpResponse.BodyHandlers.ofFile(Path.of(".\\src\\main\\resources\\user-" + id + "-post-" + postNumber + "-comments.json")));
     }
 
     static int maxPostFinder() {
