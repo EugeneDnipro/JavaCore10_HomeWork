@@ -11,5 +11,6 @@ public class TestWebInteraction {
         OutputUtils.printResponseCodeAndBody(WebInteraction.sendGETbyID("2"));
         OutputUtils.printResponseCodeAndBody(WebInteraction.sendGETbyUserName("Samantha"));
         WebInteraction.commentsToLastPostOfUser("2");
+        OutputUtils.printResponseCodeAndBody(WebInteraction.openedTasks("3"));
     }
 }

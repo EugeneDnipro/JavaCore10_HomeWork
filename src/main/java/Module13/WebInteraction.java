@@ -136,4 +136,19 @@ public class WebInteraction {
         }
         return count;
     }
+
+    static HttpResponse<String> openedTasks(String id) throws IOException, InterruptedException {
+        HttpClient client = HttpClient.newHttpClient();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(USERS_URL + "/" + id + "/todos" + "?completed=false"))
+                .GET()
+                .build();
+
+        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        methodName = new Object() {
+        }.getClass().getEnclosingMethod().getName();
+        return response;
+    }
 }
+
